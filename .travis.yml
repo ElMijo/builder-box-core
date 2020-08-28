@@ -14,9 +14,9 @@ jobs:
           script: yarn lint && yarn format
         - stage: Unit Tests
           if: branch = master OR type = pull_request
-          before_install: yarn global add codecov
+          before_install: yarn global add codecov coveralls
           script: yarn test:unit
-          after_success: codecov
+          after_success: codecov && coveralls < coverage/lcov.info
         - stage: Integration Tests
           if: branch = master OR type = pull_request
           script: yarn test:integration
