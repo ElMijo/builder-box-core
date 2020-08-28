@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "declaration": true,
+        "declarationMap": true,
+        "declarationDir": "lib/types",
+        "isolatedModules": false,
+        "emitDeclarationOnly": true,
+        "noEmit": false,
+        "allowJs": false,
+        "noEmitOnError": true
+    }
+}
