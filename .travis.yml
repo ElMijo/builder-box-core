@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - '12'
+stages:
+  - Code Quality
+  - Unit Tests
+  - Integration Tests
+script: skip
+
+jobs:
+    include:
+        - stage: Code Quality
+          if: branch = master OR type = pull_request
+          script: yarn lint && yarn format
+        - stage: Unit Tests
+          if: branch = master OR type = pull_request
+          before_install: yarn global add codecov
+          script: yarn test:unit
+          after_success: codecov
+        - stage: Integration Tests
+          if: branch = master OR type = pull_request
+          script: yarn test:integration
+cache:
+    yarn: true
+notifications:
+    email: false

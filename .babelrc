@@ -1,0 +1,9 @@
+{
+    "presets": [
+      ["@babel/env", { "useBuiltIns": "entry", "corejs": "3.0.0", "targets":{ "node": "current"}}],
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  }

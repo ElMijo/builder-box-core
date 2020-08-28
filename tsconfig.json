@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "locale": "en",
+        "lib": ["ES2019"],
+        "module": "commonjs",
+        "target": "ES2019",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "pretty": true,
+        "strict": true,
+        "outDir": "lib",
+        "alwaysStrict": true,
+        "declaration": true,
+        "declarationDir": "lib",
+        "declarationMap": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "noImplicitAny": false,
+        "strictNullChecks": false
+    },
+    "baseUrl": ".",
+    "include": ["src/**/*.ts"],
+    "exclude": [
+      "lib",
+      "tests",
+      "node_modules",
+      "**/*.spec.ts",
+      "coverage",
+      "backup",
+      ".awcache",
+      "webpack.config.js"
+    ]
+}
