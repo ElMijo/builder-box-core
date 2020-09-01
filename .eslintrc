@@ -22,6 +22,9 @@
         "@typescript-eslint/no-empty-interface": [2, {"allowSingleExtends": true}],
         "@typescript-eslint/no-inferrable-types": 0,
         "@typescript-eslint/explicit-module-boundary-types": [2, { "allowArgumentsExplicitlyTypedAsAny": true }],
-        "@typescript-eslint/no-unsafe-member-access": 0
+        "@typescript-eslint/no-unsafe-member-access": 0,
+        "@typescript-eslint/ban-types":[2, {"types":{ "Function": false}}],
+        "@typescript-eslint/no-empty-function": [2, {"allow": ["arrowFunctions"]}],
+        "@typescript-eslint/restrict-template-expressions": 0
     }
 }
