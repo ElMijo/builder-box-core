@@ -1,3 +1,5 @@
+import cors from 'cors'
+import { json, urlencoded } from 'body-parser'
 import Express, { Router, Request, Response, NextFunction } from 'express'
 import request from 'supertest'
 import { Application, ResourceType, MiddlewareType } from '../../src/index'
@@ -71,10 +73,17 @@ describe("Testing Applicantion class...", () => {
             next()
         }
         const app = new Application
-        app.registerMiddleware(middleware).registerResource(resource)
+        app
+            .registerMiddleware(cors())
+            .registerMiddleware(json())
+            .registerMiddleware(urlencoded({ extended: true }))
+            .registerMiddleware(middleware)
+            .registerResource(resource)
         request(app.getEngine())
             .get("/api")
             .expect('X-VALUE', 'Builder Box Test')
+            .expect('content-type', 'application/json; charset=utf-8')
+            .expect('Access-Control-Allow-Origin', '*')
             .expect(200, {message: "Testing api..."}, done)
     })
 })
