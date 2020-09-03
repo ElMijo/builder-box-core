@@ -1,11 +1,11 @@
 {
   "name": "@builderbox/core",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "This is the core of Builder Box Micro Framework",
   "license": "MIT",
   "private": false,
   "main": "lib/bulderbox-core.js",
-  "types": "lib/bulderbox-core.d.ts",
+  "types": "lib/types/index.d.ts",
   "keywords": [
     "builder",
     "box",
@@ -82,6 +82,9 @@
   "jest": {
     "roots": [
       "tests"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
     ],
     "testEnvironment": "node",
     "transform": {
