@@ -1,4 +1,5 @@
-import Express from 'express'
+import Express, { RequestHandler, NextFunction } from 'express'
+import { NextHandleFunction, ErrorHandleFunction } from 'connect'
 
 /**
  * Type to register one Resource in the BuilderBox Aplication.
@@ -6,31 +7,13 @@ import Express from 'express'
 export type ResourceType = [string, Express.Router]
 
 /**
- * Help to validate ResourceType implementation
- * @param {Boolean} obj
- */
-export const isResourceType = (obj: any): obj is ResourceType => {
-    return (
-        Array.isArray(obj) &&
-        obj.length === 2 &&
-        typeof obj[0] === 'string' &&
-        typeof obj[1] === 'function' &&
-        obj[1].name === 'router'
-    )
-}
-
-/**
  * Type register one Middleware in the Builder Box Application.
  */
-export interface MiddlewareType extends Express.RequestHandler {}
-
-/**
- * Help to validate ResourceType implementation
- * @param {any} obj
- */
-export const isMiddlewareType = (obj: any): obj is MiddlewareType => {
-    return typeof obj === 'function'
-}
+export type MiddlewareType =
+    | RequestHandler
+    | NextFunction
+    | NextHandleFunction
+    | ErrorHandleFunction
 
 /**
  * Application Interface.
@@ -42,7 +25,6 @@ export interface ApplicationInterface {
      * @param {string} path Path where you want to register the resource. See {@link https://expressjs.com/es/guide/routing.html#route-paths|Express Router Path}
      * @param {Router} resource Router that you want to register. See {@link https://expressjs.com/es/guide/routing.html#express-router|Express Router}
      * @returns {ApplicationInterface}
-     * @throws {Error} When given invalid parameter type.
      */
     registerResource(resource: ResourceType): ApplicationInterface
 
@@ -51,7 +33,6 @@ export interface ApplicationInterface {
      *
      * @param {MiddlewareType} middleware
      * @returns {ApplicationInterface} Middleware thaht you want to register. See {@link https://expressjs.com/es/guide/using-middleware.html#middleware.application|Express Middlerare }
-     * @throws {Error} When given invalid parameter type.
      */
     registerMiddleware(middleware: MiddlewareType): ApplicationInterface
 
@@ -91,9 +72,6 @@ export class Application implements ApplicationInterface {
      * {@inheritdoc}
      */
     public registerResource(resource: ResourceType): ApplicationInterface {
-        if (!isResourceType(resource)) {
-            throw new Error('The resource object is not a ResourceType')
-        }
         if (!this.isBooted) this.resources.push(resource)
         return this
     }
@@ -104,9 +82,6 @@ export class Application implements ApplicationInterface {
     public registerMiddleware(
         middleware: MiddlewareType
     ): ApplicationInterface {
-        if (!isMiddlewareType(middleware)) {
-            throw new Error('The middleware object is not a MiddlewareType')
-        }
         if (!this.isBooted) this.middlewares.push(middleware)
         return this
     }

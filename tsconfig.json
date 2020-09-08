@@ -9,6 +9,7 @@
         "pretty": true,
         "strict": true,
         "outDir": "lib",
+        "skipLibCheck":true,
         "alwaysStrict": true,
         "declaration": true,
         "declarationDir": "lib",

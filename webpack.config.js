@@ -16,9 +16,9 @@ module.exports = {
     mode: "production",
     devtool: 'source-map',
     output: {
-        filename: 'builderbix-core.js',
+        filename: 'builderbox-core.js',
         path: path.resolve(__dirname, './lib'),
-        // libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2'
     },
     resolve: {
         extensions: ['.ts', '.js', '.json'],
